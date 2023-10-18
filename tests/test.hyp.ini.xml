@@ -21,7 +21,7 @@
           <num_smear>1</num_smear>
           <no_smear_dir>-1</no_smear_dir>
           <BlkMax>100</BlkMax>
-          <BlkAccu>1.0e-5</BlkAccu>
+          <BlkAccu>1.0e-15</BlkAccu>
         </Param>
         <NamedObject>
           <gauge_id>default_gauge_field</gauge_id>
