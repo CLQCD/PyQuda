@@ -2829,6 +2829,30 @@ cdef class QudaGaugeSmearParam:
         self.param.rho = value
 
     @property
+    def alpha1(self):
+        return self.param.alpha1
+
+    @alpha1.setter
+    def alpha1(self, value):
+        self.param.alpha1 = value
+
+    @property
+    def alpha2(self):
+        return self.param.alpha2
+
+    @alpha2.setter
+    def alpha2(self, value):
+        self.param.alpha2 = value
+
+    @property
+    def alpha3(self):
+        return self.param.alpha3
+
+    @alpha3.setter
+    def alpha3(self, value):
+        self.param.alpha3 = value
+
+    @property
     def meas_interval(self):
         return self.param.meas_interval
 

@@ -1,4 +1,5 @@
 from typing import List, Union
+import warnings
 from math import sqrt
 
 from . import pyquda as quda
@@ -19,7 +20,31 @@ from .dslash.abstract import Dslash
 from .utils.source import source
 
 
+def hyp_smear(latt_size: List[int], gauge: LatticeGauge, nstep: int, alpha1: float, alpha2: float, alpha3: float):
+    smear_param = quda.QudaGaugeSmearParam()
+    smear_param.n_steps = nstep
+    smear_param.alpha1 = alpha1
+    smear_param.alpha2 = alpha2
+    smear_param.alpha3 = alpha3
+    smear_param.meas_interval = nstep + 1
+    smear_param.smear_type = enum_quda.QudaGaugeSmearType.QUDA_GAUGE_SMEAR_HYP
+    obs_param = quda.QudaGaugeObservableParam()
+    obs_param.compute_qcharge = enum_quda.QudaBoolean.QUDA_BOOLEAN_TRUE
+    dslash = getDslash(latt_size, 0, 0, 0, anti_periodic_t=False)
+    dslash.gauge_param.reconstruct = enum_quda.QudaReconstructType.QUDA_RECONSTRUCT_NO
+    dslash.loadGauge(gauge)
+    quda.performGaugeSmearQuda(smear_param, obs_param)
+    dslash.gauge_param.type = enum_quda.QudaLinkType.QUDA_SMEARED_LINKS
+    quda.saveGaugeQuda(gauge.data_ptrs, dslash.gauge_param)
+
+
 def smear(latt_size: List[int], gauge: LatticeGauge, nstep: int, rho: float):
+    """Preserve for compability."""
+    warnings.warn("Deprecated. Pleause `stout_smear()` instead.", DeprecationWarning)
+    stout_smear(latt_size, gauge, nstep, rho)
+
+
+def stout_smear(latt_size: List[int], gauge: LatticeGauge, nstep: int, rho: float):
     smear_param = quda.QudaGaugeSmearParam()
     smear_param.n_steps = nstep
     smear_param.rho = rho
@@ -36,6 +61,12 @@ def smear(latt_size: List[int], gauge: LatticeGauge, nstep: int, rho: float):
 
 
 def smear4(latt_size: List[int], gauge: LatticeGauge, nstep: int, rho: float):
+    """Preserve for compability."""
+    warnings.warn("Deprecated. Pleause `stout_smear_4d()` instead.", DeprecationWarning)
+    stout_smear_4d(latt_size, gauge, nstep, rho)
+
+
+def stout_smear_4d(latt_size: List[int], gauge: LatticeGauge, nstep: int, rho: float):
     smear_param = quda.QudaGaugeSmearParam()
     smear_param.n_steps = nstep
     smear_param.rho = rho

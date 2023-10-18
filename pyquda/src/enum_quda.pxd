@@ -526,6 +526,7 @@ cdef extern from "enum_quda.h":
         QUDA_GAUGE_SMEAR_OVRIMP_STOUT
         QUDA_GAUGE_SMEAR_WILSON_FLOW
         QUDA_GAUGE_SMEAR_SYMANZIK_FLOW
+        QUDA_GAUGE_SMEAR_HYP
         QUDA_GAUGE_SMEAR_INVALID = QUDA_INVALID_ENUM
 
     ctypedef enum QudaFermionSmearType:

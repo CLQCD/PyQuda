@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<chroma>
+  <annotation>
+    ; $Id: fermstate.ini.xml,v 1.1 2006-09-21 20:18:15 edwards Exp $
+    ;
+    ; Test input file for chroma main program
+    ;
+  </annotation>
+  <Param>
+    <InlineMeasurements>
+
+      <elem>
+        <Name>LINK_SMEAR</Name>
+        <Frequency>1</Frequency>
+        <Param>
+          <version>5</version>
+          <LinkSmearingType>HYP_SMEAR</LinkSmearingType>
+          <alpha1>0.75</alpha1>
+          <alpha2>0.6</alpha2>
+          <alpha3>0.3</alpha3>
+          <num_smear>1</num_smear>
+          <no_smear_dir>-1</no_smear_dir>
+          <BlkMax>100</BlkMax>
+          <BlkAccu>1.0e-5</BlkAccu>
+        </Param>
+        <NamedObject>
+          <gauge_id>default_gauge_field</gauge_id>
+          <linksmear_id>hyp</linksmear_id>
+        </NamedObject>
+      </elem>
+
+
+      <elem>
+        <Name>QIO_WRITE_NAMED_OBJECT</Name>
+        <Frequency>1</Frequency>
+        <NamedObject>
+          <object_id>hyp</object_id>
+          <object_type>Multi1dLatticeColorMatrix</object_type>
+        </NamedObject>
+        <File>
+          <file_name>hyp.lime</file_name>
+          <file_volfmt>SINGLEFILE</file_volfmt>
+        </File>
+      </elem>
+
+    </InlineMeasurements>
+    <nrow>4 4 4 8</nrow>
+  </Param>
+
+  <RNG>
+    <Seed>
+      <elem>11</elem>
+      <elem>11</elem>
+      <elem>11</elem>
+      <elem>0</elem>
+    </Seed>
+  </RNG>
+
+  <Cfg>
+    <cfg_type>SZINQIO</cfg_type>
+    <cfg_file>tests/weak_field.lime</cfg_file>
+  </Cfg>
+</chroma>
